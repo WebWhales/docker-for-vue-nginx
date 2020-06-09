@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  # Node + Vue CLI + NGINX
+  web:
+    image: webwhales/for-vue-nginx:latest
+    container_name: web
+    hostname: domain.localhost
+    restart: unless-stopped
+    volumes:
+      - ./.docker/templates/site.conf:/etc/nginx/sites-enabled/site.conf
+      #- ./.docker/templates/supervisor.conf:/etc/supervisor/conf.d/supervisor-vue.conf
+      - ./.docker/logs/web_nginx:/var/log/nginx
+      - ./:/var/www/html
+    ports:
+      - "80:80"
+      - "443:443"
