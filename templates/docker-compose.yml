@@ -8,8 +8,8 @@ services:
     hostname: domain.localhost
     restart: unless-stopped
     volumes:
-      - ./.docker/templates/site.conf:/etc/nginx/sites-enabled/site.conf
-      #- ./.docker/templates/supervisor.conf:/etc/supervisor/conf.d/supervisor-vue.conf
+      - ./.docker/site.conf:/etc/nginx/sites-enabled/site.conf
+      #- ./.docker/supervisor.conf:/etc/supervisor/conf.d/supervisor-vue.conf
       - ./.docker/logs/web_nginx:/var/log/nginx
       - ./:/var/www/html
     ports:
