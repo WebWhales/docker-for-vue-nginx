@@ -50,7 +50,7 @@ RUN openssl req -x509 \
 #
 # Install Gulp globally
 #
-RUN yarn global add @vue/cli gulp-cli gulp
+RUN yarn global add @vue/cli @vue/cli-service-global gulp-cli gulp
 
 
 WORKDIR /var/www/html
