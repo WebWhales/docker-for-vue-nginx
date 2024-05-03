@@ -32,29 +32,19 @@ RUN chown -R www:www /var/lib/nginx && \
     chown -R www:www /var/www/html
 
 
+#
+# Installing corepack, n and yarn
+#
+RUN npm -g install corepack n
+RUN corepack enable && yarn set version stable && yarn set version 4.x
+
+
 # Copy suporvisor config
 COPY config/supervisor/supervisord.conf /etc/supervisord.conf
 
 
-# Add an SSL certificate for *.localhost
-COPY config/ssl/localhost.ext /etc/ssl/localhost.ext
-RUN openssl req -x509 \
-    -out /etc/ssl/localhost.crt \
-    -keyout /etc/ssl/localhost.key \
-    -newkey rsa:2048 -nodes -sha256 -days 1024 \
-    -subj "/C=NL/ST=Zuid-Holland/O=Localhost/CN=localhost" \
-    -extensions EXT \
-    -config /etc/ssl/localhost.ext
-
-
-#
-# Install Gulp globally
-#
-RUN yarn global add @vue/cli @vue/cli-service-global gulp-cli gulp
-
-
 WORKDIR /var/www/html
-EXPOSE 80 443
+EXPOSE 80
 
 
 # Let supervisord start nginx & php-fpm

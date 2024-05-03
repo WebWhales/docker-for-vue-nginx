@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  # Node + Vue CLI + NGINX
+  # Node + npm + yarn + NGINX
   web:
     image: webwhales/for-vue-nginx:latest
     container_name: web
@@ -14,4 +14,4 @@ services:
       - ./:/var/www/html
     ports:
       - "80:80"
-      - "443:443"
+      - "5173:5173"
